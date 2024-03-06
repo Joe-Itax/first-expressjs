@@ -19,9 +19,9 @@ app.get("/", (req, res) => {
   res.send("L'application fonctionne");
 });
 
-app.get("/articles", (req, res) => {
+/*app.get("/articles", (req, res) => {
   res.send(data);
-});
+});*/
 
 app.get("/articles/:id", (req, res) => {
   const { id } = req.params;
@@ -84,7 +84,23 @@ app.patch("/articles/:id", (req, res) =>{
 
 
 
+//Listing limité des articles
+app.get("/articles", (req, res) =>{
+  const page = req.query.page || 1;
+  const pageSize = req.query.pageSize || 5;
 
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = page * pageSize;
+
+  const pageArticles = data.slice(startIndex, endIndex);
+  res.send(pageArticles);
+})
+
+
+//Suppression de plusieurs articles avec une seule requete 
+app.delete("articles/:id", (req, res) =>{
+  i
+})
 
 
 
