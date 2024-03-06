@@ -66,6 +66,28 @@ app.delete("/articles/:id", (req, res) => {
   }
 });
 
+
+//Modification partielle d'un article
+app.patch("/articles/:id", (req, res) =>{
+  const newTitleOfAnArticle = req.body.title;
+  const {id} = req.params;
+  const articleIndex = findArticleIndex(id);
+
+  if(articleIndex < 0){
+    res.status(404).send(`Erreur car l'article avec l'id ${id} n'existe pas.`)
+  }else{
+
+    data[articleIndex].title = newTitleOfAnArticle;
+    res.send(data);
+  }
+})
+
+
+
+
+
+
+
 app.listen(PORT, () => {
   console.log(`Le serveur écoute sur le port ${PORT}`);
 });
